@@ -6,14 +6,16 @@ let assignments = [...assignmentsFromFile];
 const assignmentRouter = Router();
 
 // start coding here
-assignmentRouter.get("/assignments", (req, res) => {
+assignmentRouter.get("/", (req, res) => {
+  console.log(assignments);
+
   return res.json({
     data: assignments,
   });
 });
 
-assignmentRouter.get("/assignments/:id", (req, res) => {
-  const assignmentId = +req.params.id;
+assignmentRouter.get("/:id", (req, res) => {
+  const assignmentId = Number(req.params.id);
   const hasFound = assignments.find((assign) => assign.id === assignmentId);
 
   if (!hasFound) {
@@ -22,6 +24,7 @@ assignmentRouter.get("/assignments/:id", (req, res) => {
     });
   }
 
+  console.log("hello");
   const assignment = assignments.filter((assign) => assign.id === assignmentId);
 
   return res.json({
